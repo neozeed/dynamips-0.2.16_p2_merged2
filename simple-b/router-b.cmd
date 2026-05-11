@@ -9,7 +9,7 @@
 
 @attrib *.* -r
 ..\dynamips.exe -P 7200 %IOS%  ^
--m %RAM% ^
+-r %RAM% ^
 -t %NPE%  ^
 -p 0:C7200-IO-FE ^
 -p 1:PA-4E  ^
