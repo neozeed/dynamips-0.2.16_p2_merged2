@@ -32,7 +32,7 @@ LN_S = ln
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 
-CC = gcc
+CC = gcc -m32
 CFLAGS = -g -O2
 CPPFLAGS = 
 LDFLAGS = 

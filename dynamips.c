@@ -20,7 +20,29 @@
 #include <assert.h>
 #include <getopt.h>
 #ifdef __MINGW32__
+#define _DYNAMIPS_C 1
 #include "dpcap.h"
+
+PCAP_LIB_VERSION     _pcap_lib_version = NULL;
+PCAP_OPEN_LIVE       _pcap_open_live = NULL;
+PCAP_SENDPACKET      _pcap_sendpacket = NULL;
+PCAP_SETNONBLOCK     _pcap_setnonblock = NULL;
+PCAP_NEXT            _pcap_next = NULL;
+PCAP_CLOSE           _pcap_close = NULL;
+PCAP_GETNONBLOCK     _pcap_getnonblock = NULL;
+PCAP_COMPILE         _pcap_compile = NULL;
+PCAP_SETFILTER       _pcap_setfilter = NULL;
+PCAP_DATALINK_NAME_TO_VAL _pcap_datalink_name_to_val = NULL;
+PCAP_OPEN_DEAD       _pcap_open_dead = NULL;
+PCAP_SNAPSHOT        _pcap_snapshot = NULL;
+PCAP_DUMP            _pcap_dump = NULL;
+PCAP_DUMP_OPEN       _pcap_dump_open = NULL;
+PCAP_DUMP_CLOSE      _pcap_dump_close = NULL;
+PCAP_DUMP_FLUSH      _pcap_dump_flush = NULL;
+PCAP_SETDIRECTION    _pcap_setdirection = NULL;
+PCAP_FINDALLDEVS     _pcap_findalldevs = NULL;
+PCAP_FREEALLDEVS     _pcap_freealldevs = NULL;
+
 #endif
 
 #include "dynamips.h"

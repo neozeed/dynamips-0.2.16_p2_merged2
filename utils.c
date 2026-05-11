@@ -13,7 +13,13 @@
 #include <string.h>
 #include <stdarg.h>
 #include <unistd.h>
+#define _POSIX_THREAD_SAFE_FUNCTIONS
+#define _POSIX_C_SOURCE
 #include <time.h>
+//new mingw from time.h not sure why it's not pulling in
+__forceinline struct tm *__CRTDECL localtime_r(const time_t *_Time, struct tm *_Tm) {
+  return localtime_s(_Tm, _Time) ? NULL : _Tm;
+}
 #include <signal.h>
 #include <sys/time.h>
 #ifdef __MINGW32__

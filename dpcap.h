@@ -36,26 +36,31 @@ typedef int (__cdecl *PCAP_SETDIRECTION)(pcap_t *, pcap_direction_t);
 typedef int (__cdecl *PCAP_FINDALLDEVS)(pcap_if_t **, char *);
 typedef void (__cdecl *PCAP_FREEALLDEVS)(pcap_if_t *);
 
+#ifdef _DYNAMIPS_C
+#define EXTERN
+#else
+#define EXTERN extern
+#endif
 
-PCAP_LIB_VERSION 	_pcap_lib_version;
-PCAP_OPEN_LIVE		_pcap_open_live;
-PCAP_SENDPACKET		_pcap_sendpacket;
-PCAP_SETNONBLOCK	_pcap_setnonblock;
-PCAP_NEXT		_pcap_next;
-PCAP_CLOSE		_pcap_close;
-PCAP_GETNONBLOCK	_pcap_getnonblock;
-PCAP_COMPILE		_pcap_compile;
-PCAP_SETFILTER		_pcap_setfilter;
-PCAP_DATALINK_NAME_TO_VAL	_pcap_datalink_name_to_val;
-PCAP_OPEN_DEAD		_pcap_open_dead;
-PCAP_SNAPSHOT		_pcap_snapshot;
-PCAP_DUMP		_pcap_dump;
-PCAP_DUMP_OPEN		_pcap_dump_open;
-PCAP_DUMP_CLOSE		_pcap_dump_close;
-PCAP_DUMP_FLUSH		_pcap_dump_flush;
-PCAP_SETDIRECTION	_pcap_setdirection;
-PCAP_FINDALLDEVS	_pcap_findalldevs;
-PCAP_FREEALLDEVS	_pcap_freealldevs;
+EXTERN PCAP_LIB_VERSION 	_pcap_lib_version;
+EXTERN PCAP_OPEN_LIVE		_pcap_open_live;
+EXTERN PCAP_SENDPACKET		_pcap_sendpacket;
+EXTERN PCAP_SETNONBLOCK	_pcap_setnonblock;
+EXTERN PCAP_NEXT		_pcap_next;
+EXTERN PCAP_CLOSE		_pcap_close;
+EXTERN PCAP_GETNONBLOCK	_pcap_getnonblock;
+EXTERN PCAP_COMPILE		_pcap_compile;
+EXTERN PCAP_SETFILTER		_pcap_setfilter;
+EXTERN PCAP_DATALINK_NAME_TO_VAL	_pcap_datalink_name_to_val;
+EXTERN PCAP_OPEN_DEAD		_pcap_open_dead;
+EXTERN PCAP_SNAPSHOT		_pcap_snapshot;
+EXTERN PCAP_DUMP		_pcap_dump;
+EXTERN PCAP_DUMP_OPEN		_pcap_dump_open;
+EXTERN PCAP_DUMP_CLOSE		_pcap_dump_close;
+EXTERN PCAP_DUMP_FLUSH		_pcap_dump_flush;
+EXTERN PCAP_SETDIRECTION	_pcap_setdirection;
+EXTERN PCAP_FINDALLDEVS	_pcap_findalldevs;
+EXTERN PCAP_FREEALLDEVS	_pcap_freealldevs;
 
 //for net_io_filter
 //yuck!

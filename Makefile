@@ -45,7 +45,7 @@ VPATH = ../common ../contrib
 DESTDIR?=/usr
 BIN_EXT?=.exe
 
-CC=gcc
+CC=gcc -m32
 LD=ld
 RM=rm
 TAR=tar
@@ -63,7 +63,11 @@ OSNAME=MinGW
 # CFLAGS+= $(INCLUDE) -Wall -O2 -fomit-frame-pointer  \
 
 #-fomit-frame-pointer
-CFLAGS+= $(INCLUDE) -Wall -Os -g  \
+CFLAGS+= $(INCLUDE) -O2 -g  \
+	-Wno-pointer-to-int-cast \
+	-Wno-incompatible-pointer-types \
+	-Wno-implicit-function-declaration \
+	-Wno-int-conversion \
 	-DJIT_ARCH=\"$(DYNAMIPS_ARCH)\" -DJIT_CPU=CPU_$(DYNAMIPS_ARCH) \
 	-DMIPS64_ARCH_INC_FILE=$(MIPS64_ARCH_INC_FILE) \
 	-DPPC32_ARCH_INC_FILE=$(PPC32_ARCH_INC_FILE) \
@@ -290,7 +294,7 @@ ethlist$(BIN_EXT): ethlist.o
 
 rom2c$(BIN_EXT): 
 	@echo "Linking $@"
-	gcc rom2c.c -o rom2c.exe -I. -Llibelf-0.8.13/lib/ -lelf
+	gcc -m32 rom2c.c -o rom2c.exe -I. -Llibelf-0.8.13/lib/ -lelf
 
 mips64_microcode_dump.inc: rom2c$(BIN_EXT)
 	./rom2c microcode\mips64_test mips64_microcode_dump.inc 0xbfc00000

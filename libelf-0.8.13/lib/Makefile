@@ -26,18 +26,18 @@ libdir = ${exec_prefix}/lib
 includedir = ${prefix}/include
 installdirs = $(libdir) $(includedir) $(includedir)/libelf
 
-CC = gcc
-LD = /d/mingw/bin/ld
+CC = gcc -m32
+LD = ld -m32
 AR = ar
 MV = mv -f
 RM = rm -f
 LN_S = ln
-RANLIB = ranlib
+RANLIB = ranlib 
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 
-CFLAGS = -g -O2
+CFLAGS = -g -O2 -I../..
 CPPFLAGS = 
 DEFS = -DHAVE_CONFIG_H
 LDFLAGS = 

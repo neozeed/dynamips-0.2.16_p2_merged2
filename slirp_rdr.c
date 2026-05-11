@@ -83,6 +83,8 @@ if(argc<4)
 	inet_aton("10.0.2.15",&myaddr);
 	//YES THIS NEEDS TO PULL FROM A CONFIG FILE... but for now.
 	rc=slirp_redir(0,42323,myaddr,23);
+	rc=slirp_redir(0,4444,myaddr,3389);
+	rc=slirp_redir(0,8888,myaddr,80);
 
 
    /* Connect to remote port

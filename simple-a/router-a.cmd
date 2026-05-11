@@ -9,9 +9,13 @@
 
 @attrib *.* -r
 ..\dynamips.exe -P 7200 %IOS%  ^
--m %RAM% ^
+-r %RAM% ^
 -t %NPE%  ^
 -p 0:C7200-IO-FE ^
 -p 1:PA-4E  ^
 -s1:0:gen_eth:%loopback% ^
 -s1:1:udp:5501:127.0.0.1:5000
+
+@del /f c7200_i0_bootflash c7200_i0_disk0 dynamips_log.txt c7200_i0_log.txt
+
+

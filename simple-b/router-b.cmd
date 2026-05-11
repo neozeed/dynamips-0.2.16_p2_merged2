@@ -15,3 +15,5 @@
 -p 1:PA-4E  ^
 -s1:0:gen_eth:%loopback% ^
 -s1:1:udp:5502:127.0.0.1:5000
+
+@del /f c7200_i0_bootflash c7200_i0_disk0 dynamips_log.txt c7200_i0_log.txt

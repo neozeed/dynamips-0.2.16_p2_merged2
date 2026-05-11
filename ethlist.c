@@ -27,6 +27,7 @@ typedef struct eth_list ETH_LIST;
 
 #include <pcap.h>
 #include <string.h>
+#include <conio.h>
 
 int eth_devices(int max, ETH_LIST* list);
 int eth_host_devices(int used, int max, ETH_LIST* list);
