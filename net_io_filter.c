@@ -30,10 +30,13 @@
 #include <pthread.h>
 
 #ifdef GEN_ETH
-//#include <pcap.h>
-#include "WpdPack\Include\pcap.h"
+#ifndef _WIN32
+#include <pcap.h>
+#else
 #ifdef __MINGW32__
+#include "WpdPack\Include\pcap.h"
 #include "dpcap.h"
+#endif
 #endif
 #endif
 

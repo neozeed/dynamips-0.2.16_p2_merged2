@@ -11,6 +11,12 @@
 
 #include "utils.h"
 
+#ifdef _WIN32
+#else
+#define Musleep usleep
+#define O_BINARY 0
+#endif
+
 /* Debugging flags */
 #define DEBUG_BLOCK_SCAN       0
 #define DEBUG_BLOCK_COMPILE    0

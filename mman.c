@@ -1,6 +1,7 @@
 //taken from here:
 //https://code.google.com/p/mman-win32/source/browse/trunk/mman.c?r=2
 
+#ifdef _WIN32
 #include <windows.h>
 #include <errno.h>
 #include <io.h>
@@ -164,3 +165,5 @@ int munlock(const void *addr, size_t len)
     
     return -1;
 }
+#endif
+

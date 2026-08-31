@@ -1,3 +1,4 @@
+#ifdef _WIN32
 #include <windows.h>
 #include <stdio.h>
 
@@ -36,3 +37,4 @@ void Musleep(int waitTime) {
 		Sleep(5);
     } while((time2-time1) < waitTime);
 }
+#endif

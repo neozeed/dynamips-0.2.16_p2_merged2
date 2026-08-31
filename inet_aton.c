@@ -1,3 +1,4 @@
+#ifdef _WIN32
 /*
  *
  *	@doc RESOLVE
@@ -151,3 +152,5 @@ inet_aton(register const char *cp, struct in_addr *addr)
         addr->s_addr = htonl(val);
     return (1);
 }
+#endif
+

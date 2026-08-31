@@ -36,10 +36,12 @@
 #define HAVE_REMOTE
 #endif
 
-#include "WpdPack\Include\pcap.h"
 #ifdef __MINGW32__
+#include "WpdPack\Include\pcap.h"
 #include "dpcap.h"
 HINSTANCE hPcapLib;
+#else
+#include <pcap.h>
 #endif
 #include "utils.h"
 #include "gen_eth.h"

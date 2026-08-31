@@ -11,7 +11,11 @@
 #define __GEN_ETH_H__  1
 
 #include <sys/types.h>
+#ifdef _WIN32
 #include "WpdPack\Include\pcap.h"
+#else
+#include "pcap.h"
+#endif
 
 /* Initialize a generic ethernet driver */
 pcap_t *gen_eth_init(char *device);

@@ -17,6 +17,7 @@ On Sat, Sep 22, 2012 at 8:26 PM, Stefan Weil <sw@weilnetz.de> wrote:
 For now, but nothing shows that there is a problem. Adding a few
 simple locks shouldn't be difficult, or FIXME/XXX comment otherwise.
 */
+#ifdef _WIN32
 
 #include <time.h>
 struct tm *localtime_r(const time_t *timep, struct tm *result)
@@ -29,3 +30,5 @@ struct tm *localtime_r(const time_t *timep, struct tm *result)
    }
     return p;
 }
+#endif
+

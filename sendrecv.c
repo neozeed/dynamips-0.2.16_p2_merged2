@@ -3,6 +3,7 @@
 http://permalink.gmane.org/gmane.comp.video.videolan.vlc.devel/41052
 
 */
+#ifdef _WIN32
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <errno.h>
@@ -93,3 +94,5 @@ size_t i;
 #endif
     return -1;
 }
+#endif
+

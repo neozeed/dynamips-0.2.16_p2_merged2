@@ -388,6 +388,7 @@ static int hypervisor_exec_cmd(hypervisor_conn_t *conn,
 }
 
 /* Thread for servicing connections */
+#ifdef _WIN32
 static void *hypervisor_thread(void *arg)
 {   
    hypervisor_conn_t *conn = arg;
@@ -478,6 +479,67 @@ printf("--->%s",buffer);
    parser_context_free(&ctx);
    return NULL;
 }
+#else
+//original
+static void *hypervisor_thread(void *arg)
+{   
+   hypervisor_conn_t *conn = arg;
+   char buffer[512],**tokens;
+   parser_context_t ctx;
+   int res;
+   
+   tokens = NULL;
+   parser_context_init(&ctx);
+
+   while(conn->active) {
+      if (!fgets(buffer,sizeof(buffer),conn->in))
+         break;
+   
+      if (!*buffer)
+         continue;
+
+      /* Tokenize command line */
+      res = parser_scan_buffer(&ctx,buffer,strlen(buffer));
+
+      if (res != 0) {   
+         tokens = NULL;
+
+         if (ctx.error != 0) {
+            hypervisor_send_reply(conn,HSC_ERR_PARSING,1,"Parse error: %s",
+                                  parser_strerror(&ctx));
+            goto free_tokens;
+         }
+
+         if (ctx.tok_count < 2) {
+            hypervisor_send_reply(conn,HSC_ERR_PARSING,1,
+                                  "At least a module and a command "
+                                  "must be specified");
+            goto free_tokens;
+         }
+
+         /* Map token list to an array */
+         tokens = parser_map_array(&ctx);
+      
+         if (!tokens) {
+            hypervisor_send_reply(conn,HSC_ERR_PARSING,1,"No memory");
+            goto free_tokens;
+         }
+
+         /* Execute command */
+         m_log("HYPERVISOR","exec_cmd: ");
+         m_flog_str_array(log_file,ctx.tok_count,tokens);
+
+         hypervisor_exec_cmd(conn,tokens[0],tokens[1],ctx.
+                             tok_count-2,&tokens[2]);
+      
+      free_tokens:
+         free(tokens);
+         tokens = NULL;
+         parser_context_free(&ctx);
+      }
+   }
+}
+#endif
 
 static void sigpipe_handler(int sig)
 {
@@ -519,7 +581,11 @@ static void hypervisor_close_conn(hypervisor_conn_t *conn)
       //fclose(conn->out);
 
       shutdown(conn->client_fd,2);
+#ifdef _WIN32
       closesocket(conn->client_fd);
+#else
+      close(conn->client_fd);
+#endif
 
       hypervisor_remove_conn(conn);
       free(conn);
@@ -723,7 +789,11 @@ int hypervisor_tcp_server(char *ip_addr,int tcp_port)
          if (!hypervisor_create_conn(clnt)) {
             fprintf(stderr,"hypervisor_tcp_server: unable to create new "
                     "connection for FD %d\n",clnt);
+#ifdef _WIN32
             closesocket(clnt);
+#else
+            close(clnt);
+#endif
          }
       }
 
@@ -735,7 +805,9 @@ int hypervisor_tcp_server(char *ip_addr,int tcp_port)
 //         printf("f");
 //         }
 //      printf(".");fflush(stdout);
+#ifdef _WIN32
       Musleep(100000);	//probably too aggressive.
+#endif
    }   
 
    /* Close all control sockets */
@@ -743,7 +815,11 @@ int hypervisor_tcp_server(char *ip_addr,int tcp_port)
    for(i=0;i<fd_count;i++) {
       if (fd_array[i] != -1) {
          shutdown(fd_array[i],2);
+#ifdef _WIN32
          closesocket(fd_array[i]);
+#else
+         close(fd_array[i]);
+#endif
       }
    }
 

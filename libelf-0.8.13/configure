@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # Guess values for system-dependent variables and create Makefiles.
 # Generated automatically using autoconf version 2.13 
@@ -734,7 +734,7 @@ cat > conftest.$ac_ext << EOF
 #line 735 "configure"
 #include "confdefs.h"
 
-main(){return(0);}
+int main(){return(0);}
 EOF
 if { (eval echo configure:740: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
   ac_cv_prog_cc_works=yes
@@ -1484,7 +1484,8 @@ else
 #line 1485 "configure"
 #include "confdefs.h"
 #include <stdio.h>
-main()
+#include <stdlib.h>
+int main()
 {
   FILE *f=fopen("conftestval", "w");
   if (!f) exit(1);
@@ -1523,7 +1524,8 @@ else
 #line 1524 "configure"
 #include "confdefs.h"
 #include <stdio.h>
-main()
+#include <stdlib.h>
+int main()
 {
   FILE *f=fopen("conftestval", "w");
   if (!f) exit(1);
@@ -1562,7 +1564,8 @@ else
 #line 1563 "configure"
 #include "confdefs.h"
 #include <stdio.h>
-main()
+#include <stdlib.h>
+int main()
 {
   FILE *f=fopen("conftestval", "w");
   if (!f) exit(1);
@@ -1601,7 +1604,8 @@ else
 #line 1602 "configure"
 #include "confdefs.h"
 #include <stdio.h>
-main()
+#include <stdlib.h>
+int main()
 {
   FILE *f=fopen("conftestval", "w");
   if (!f) exit(1);
@@ -1641,7 +1645,9 @@ else
 #line 1642 "configure"
 #include "confdefs.h"
 #include <stdio.h>
-main()
+#include <stdlib.h>
+#include <stdint.h>
+int main()
 {
   FILE *f=fopen("conftestval", "w");
   if (!f) exit(1);
